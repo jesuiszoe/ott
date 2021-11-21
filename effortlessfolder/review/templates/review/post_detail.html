@@ -9,6 +9,7 @@
     <hr>
     <a href= {% url 'review:post-list' %}>돌아가기</a> 
     <a href= {% url 'review:post-update' post.id %}>수정하기</a> 
+    <a href= {% url 'review:post-delete' post.id %}>삭제하기</a> 
 
 
 {% endblock post_container %}
