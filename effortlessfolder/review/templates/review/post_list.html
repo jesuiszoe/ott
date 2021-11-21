@@ -1,6 +1,11 @@
 {% extends './base.html' %}
 
+
+
+
+
 {% block post_container %}
+<a href= {% url 'review:post-create' %}> 글쓰기 </a>
     <h1>글 목록 페이지</h1>
     <table>
         <tr>
@@ -10,7 +15,7 @@
         </tr>
         {% for post in posts %}
         <tr>
-            <td><a href= {% url 'post_detail' post.id %}>{{post.title}}</a></td>
+            <td><a href={% url 'review:post-detail' post.id %}>{{post.title}}</a></td> 
             <td>{{post.dt_created}}</td>
             <td>{{post.dt_modified}}</td>
         </tr>

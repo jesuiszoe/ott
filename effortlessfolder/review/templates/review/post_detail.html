@@ -7,8 +7,10 @@
     <hr>
     <div>{{post.content|linebreaksbr}}</div>
     <hr>
-    <a href={% url 'post-list' %}>돌아가기</a>
+    <a href= {% url 'review:post-list' %}>돌아가기</a> 
 
 
 
 {% endblock post_container %}
+
+
