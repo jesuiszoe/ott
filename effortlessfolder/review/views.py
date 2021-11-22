@@ -1,7 +1,6 @@
-from django.shortcuts import render, redirect,get_object_or_404
+from django.shortcuts import render, redirect
 from .models import Post
 from .forms import PostForm
-
 
 
 # Create your views here.
@@ -11,8 +10,7 @@ def post_list(request):
     return render(request, 'review/post_list.html', context)
 
 def post_detail(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-
+    post = Post.objects.get(id=post_id)
     context = {"post" : post}
     return render(request, 'review/post_detail.html', context)
 
