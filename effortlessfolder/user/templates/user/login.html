@@ -1,0 +1,107 @@
+{% extends './base.html' %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block main1 %}
+<!-- Main -->
+<div id="logo"><h1><a href="index.html">Project Name</a></h1></div>
+<div id="login" class="wrapper style1">
+    <form action="" method="POST">
+        <div class="input-box">
+            <input id="username" type="text" name="username" placeholder=" ">
+            <label for="username">ID</label>
+        </div>
+            
+        <div class="input-box">
+            <input id="password" type="password" name="password" placeholder=" ">
+            <label for="password">Password</label>
+        </div>
+        <button type="submit">LOGIN</button>
+    </form>        
+</div>
+{% endblock %}
+
+{% block style %}
+
+<style>
+    /*logo*/
+    #logo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height:400px;
+    }
+    #logo h1{
+        margin-top:250px;
+        font-size: 30px;
+    }
+    /*login*/
+    #login{
+        height: 300px;
+        margin: 200px;
+        margin-top: 0px;
+        padding-top: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .input-box{
+        position:relative;
+        margin:10px 0;
+    }
+    .input-box > input{
+        background: transparent;
+        border:1px solid #ccc;
+        padding:27px 5px 10px 0px;
+        width:350px;
+        height: 55px;
+        vertical-align: top;
+        text-indent: 10px;
+        border-radius: 10px;
+    }
+    input::placeholder{
+        color:transparent;
+    }
+    input:placeholder-shown + label{
+        color:#aaa;
+        font-size:13pt;
+        top:12px;
+        left:5px;
+        text-indent: 5px;
+    }
+    input:focus + label, label{
+        color:#e44c65;
+        font-size:10pt;
+        pointer-events:none;
+        position:absolute;
+        left:5px;
+        top:0px;
+        text-indent: 5px;
+        transition: all 0.2s ease; /* transition 안됨 왜 ??? */
+        -webkit-transition: all 0.2s ease;
+        -moz-transition:all 0.2s ease;
+        -o-transition: all 0.2s ease;
+    }
+    input:focus, input:not(:placeholder-shown){
+        border:solid 1px #e44c65;
+        outline:none;
+        font-size: 15px;
+    }
+    button{
+        border:none;
+        border-radius: 10px;
+        background-color:#e44c65;
+        color:white;
+        width:350px;
+        height:50px;
+        display: inline-block;
+        vertical-align: top;
+        font-size: 13px;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+</style>
+{% endblock %}
