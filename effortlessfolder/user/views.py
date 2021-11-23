@@ -37,3 +37,7 @@ def login(request):
 
     else:
         return render(request, 'user/login.html')
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
