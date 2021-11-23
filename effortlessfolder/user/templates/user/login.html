@@ -6,9 +6,11 @@
 
 {% block main1 %}
 <!-- Main -->
-<div id="logo"><h1><a href="index.html">Project Name</a></h1></div>
+<div id="logo"><h1><a href="{% url 'main' %}">Project Name</a></h1></div>
 <div id="login" class="wrapper style1">
-    <form action="" method="POST">
+    <form action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+    
         <div class="input-box">
             <input id="username" type="text" name="username" placeholder=" ">
             <label for="username">ID</label>
@@ -24,7 +26,6 @@
 {% endblock %}
 
 {% block style %}
-
 <style>
     /*logo*/
     #logo{
