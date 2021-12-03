@@ -1,33 +1,97 @@
-{% comment %} 
-{% extends './base.html' %}  {% endcomment %}
+{% extends './base.html' %}
 
-{% block content %}
+{% block header %}
+{% endblock %}
 
+{% block main1 %}
 {% if error %}
 {{ error }}
 <br>
 <br>
 {% endif %}
+<div id="main" class="signupPage1">
+    <h1 id="signup">Sign Up!</h1>
 
-<h1>Sign Up!</h1>
+    <form method="POST" action="{% url 'signup'%}">
 
-<form method="POST" action="{% url 'signup'%}">
+    {% csrf_token %}
+    <div id="idCheck", class="input_box">
+        <h2>User Name</h2>
+        <input name="username"  type="text" value="" placeholder="User Name">
+        <br>
+    </div>
+        
+    <br>
 
-{% csrf_token %}
-Username:
-<br>
-<input name="username"  type="text" value="">
-<br>
-Password:
-<br>
-<input name="password1"  type="password" value="">
-<br>
-Confirm Password:
-<br>
-<input name="password2"  type="password" value="">
-<br>
-<br>
-<input class="btn btn-primary" type="submit" value="Sign Up!">
-</form>
+    <div id="passCheck", class="input_box">
+        <h2>Password</h2>
+        <input name="password1"  type="password" value="" placeholder="Password">
+        <br><br>
+        <h2>Confirm Password</h2>
+        <input name="password2"  type="password" value="" placeholder="Confirm Password">
+    </div> 
+    <br>
+    <br>
+    <br>
+    <button class="btn btn-primary" type="submit">Sign Up!</button>
+    </form>
+</div>
+{% endblock %}
 
+{% block style %}
+<style>
+    #header{
+        display: block;
+    }
+    #signup{
+        font-size: 35px;
+        color: rgba(255, 255, 255, 0.75);
+        font-weight: 400;
+    }
+    #main{
+        margin:auto;
+        margin-top:100px;
+        margin-bottom: 100px;
+        width: 600px;
+        padding: 50px;
+        border:#aaa solid 2px;
+        border-radius: 20px;
+    }
+
+    .input_box input , h2{
+        width : 450px;
+        height: 55x;
+        margin-left:22px;
+    }
+    h2{
+        font-size: 20px;
+        height: 22px;
+        color:rgba(255, 255, 255, 0.75);
+    }
+    input::placeholder{
+        color:transparent;
+    }
+    input:placeholder-shown + label{
+        color:#aaa;
+        font-size:13pt;
+        top:12px;
+        left:5px;
+        text-indent: 5px;
+    }
+    button{
+        border:none;
+        margin-left:22px;
+        border-radius: 10px;
+        background-color:#e44c65;
+        color:white;
+        width:450px;
+        height:50px;
+        display: inline-block;
+        vertical-align: top;
+        font-size: 15px;
+        cursor: pointer;
+        left:50%;
+
+    }
+</style>
 {% endblock %}
