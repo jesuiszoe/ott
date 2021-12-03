@@ -31,7 +31,7 @@
 {% block main1 %}
     <h1 id = "pageTitle">CONTENTS REVIEW</h1>
     <br>
-    <!--검색-->
+    {% comment %} <!--검색-->
     <form method="GET" action="{% url 'review:search' %}">
     {% csrf_token %}
         <div id="search">
@@ -39,7 +39,7 @@
             <input name="q" type="text" value="{{q}}" placeholder="제목을 입력해주세요">
             
         </div>
-    </form>
+    </form> {% endcomment %}
     <div id="link">
         <a href= {% url 'review:post-create' %}>
             <button type="submit">리뷰 작성하기</button>
