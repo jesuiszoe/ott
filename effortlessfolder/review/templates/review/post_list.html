@@ -1,28 +1,142 @@
 {% extends './base.html' %}
 
 
+{% block content %}
+
+    {% if not posts %}
+    <h1>검색하신 내용이 없습니다</h1>
+
+        
 
 
+    {% else %}
 
-{% block post_container %}
-<a href= {% url 'review:post-create' %}> 글쓰기 </a>
-    <h1>글 목록 페이지</h1>
-    <table>
-        <tr>
-            <td>제목</td>
-            <td>작성일</td>
-            <td>수정일</td>
+        {% for post in posts.all %}
+        <div class="container"> 
+            <div class="card">
+                <div class="card-body">
+                    <h1>{{ post.title }}</h1>
+                    <p>{{ post.dt_created }}</p>
+                    
+                </div>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+
+    {% endif %}
+
+{% endblock %}
+
+{% block main1 %}
+    <h1 id = "pageTitle">CONTENTS REVIEW</h1>
+    <br>
+    <!--검색-->
+    <form method="GET" action="{% url 'review:search' %}">
+    {% csrf_token %}
+        <div id="search">
+            <button type="submit">검색</button>
+            <input name="q" type="text" value="{{q}}" placeholder="제목을 입력해주세요">
+            
+        </div>
+    </form>
+    <div id="link">
+        <a href= {% url 'review:post-create' %}>
+            <button type="submit">리뷰 작성하기</button>
+        </a>
+    </div>
+<br>
+    <table id = "create">
+
+        <tr id="infor">
+            <td>ID</td>
+            <td class="title">제목</td>
+            <td class = "date">작성일</td>
+            <td class = "mod">수정일</td>
         </tr>
         {% for post in posts %}
-        <tr>
-            <td><a href={% url 'review:post-detail' post.id %}>{{post.title}}</a></td> 
-            <td>{{post.dt_created}}</td>
-            <td>{{post.dt_modified}}</td>
+        <tr id="list">
+            <td>{{post.id}}</td>
+            <td class = "title"><a href={% url 'review:post-detail' post.id %}>{{post.title}}</a></td> 
+            <td class = "date">{{post.dt_created}}</td>
+            <td class = "mod">{{post.dt_modified}}</td>
         </tr>
         {% endfor %}
      </table>
-    
+{% endblock %}
 
-
-
-{% endblock post_container %}
+{% block style %}
+<style>
+    h1, table, form, #search, #link{
+        width:1000px;
+        margin:auto;
+    }
+    #search{
+        width:1000px;
+        margin:auto;
+    }
+    #search input{
+        width:300px;
+        height:35px;
+        float:right;
+        font-size: 15px;
+        margin-right:20px;
+    }
+    #search button{
+        float:right;
+        border: none;
+        width:60px;
+        height: 35px;
+        border-radius: 6px;
+        color:#ffffff;
+        background-color: #e44c65;
+        font-weight: 500;
+        cursor: pointer;
+    }
+    .title{
+        width: 500px;
+    }
+    .date{
+        width:250px;
+    }
+    .mod{
+        width:250px;
+    }
+    #create{
+        width : 1000px;
+        margin : auto;
+        margin-top : 10px;
+        margin-bottom: 100px;
+    }
+    #pageTitle{
+        text-align: center;
+        margin: auto;
+        margin-top:120px;
+        width : 300px;
+        height: 70px;
+        font-size : 30px;
+        font-weight: 600;
+        position: relative;
+    }
+    #infor,#list{
+        text-align: center;
+    }
+    #list{
+        background-color: #1c1d26;
+    }
+    #link{
+        margin-bottom: 20px;
+    }
+    #link button{
+        border: none;
+        float: left;
+        width:120px;
+        height: 35px;
+        border-radius: 6px;
+        color:#ffffff;
+        background-color: #e44c65;
+        font-weight: 500;
+        cursor: pointer;
+    }
+</style>
+{% endblock %}

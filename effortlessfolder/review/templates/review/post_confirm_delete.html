@@ -1,7 +1,48 @@
- {% block content %}
-    <p>{{post.title}}</p>
-    <p>삭제하시겠습니까?</p>
-    <form method="POST">{% csrf_token %}
-        <input type = "submit" value="삭제하기">
-    </form>
-{% endblock content %}
+
+
+{% extends './base.html' %}
+{% block header %}
+{% endblock %}
+{% block main1 %}
+	<div id="main" class="wrapper style1">
+	<div align = "center" class="container">
+		<p style="font-family:'Nanum Gothic'; font-size:20px; font-weight: 500;">{{post.title}}</p>
+		<p style="font-family:'Nanum Gothic'; font-size:15px;">삭제하시겠습니까?</p>
+		<section id="content">
+			<form method="POST">
+			{% csrf_token %}
+			<input id="button" type = "submit" value="삭제하기">
+			</form>
+		</section>
+	</div>
+	</div>
+{% endblock %}
+{% block style %}
+    <style>
+		form{
+			margin:0;
+		}
+		#main{
+			padding-top:200px;
+			padding-bottom: 200px;
+		}
+		input{
+			border:none;
+			margin-bottom: 0;
+		}
+		#button{
+        	border:none;
+        	border-radius: 7px;
+        	background-color:#e44c65;
+        	color:white;
+        	width:150px;
+        	height:40px;
+        	display: inline-block;
+        	vertical-align: top;
+        	font-size: 13px;
+        	cursor: pointer;
+        	margin-top: 20px;
+			margin-bottom: 0;
+    	}
+    </style>
+{% endblock %}

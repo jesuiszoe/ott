@@ -8,7 +8,7 @@
 <!-- Main -->
 <div id="logo"><h1><a href="{% url 'ott:main' %}">Project Name</a></h1></div>
 <div id="login" class="wrapper style1">
-    <form action="{% url 'login' %}" method="POST">
+    <form action="{% url 'user:login' %}" method="POST">
     {% csrf_token %}
     
         <div class="input-box">

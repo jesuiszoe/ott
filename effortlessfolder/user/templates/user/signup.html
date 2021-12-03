@@ -12,7 +12,7 @@
 <div id="main" class="signupPage1">
     <h1 id="signup">Sign Up!</h1>
 
-    <form method="POST" action="{% url 'signup'%}">
+    <form method="POST" action="{% url 'user:signup'%}">
 
     {% csrf_token %}
     <div id="idCheck", class="input_box">

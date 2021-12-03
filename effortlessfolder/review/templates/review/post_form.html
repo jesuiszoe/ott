@@ -1,17 +1,65 @@
-{% comment %} {% extends './base.html' %} {% endcomment %}
-{% load static %}
-<form method="post"> 
-{% csrf_token %}
-    <h3>제목</h3>
-    <p>{{form.title}}</P>
-    {% for error in form.title.errors %}
-        <p>{{error}}</p>
-    {% endfor %}
-    <h3>내용</h3>
-    <p>{{form.content}}</P>
-    {% for error in form.content.errors %}
-        <p>{{error}}</p>
-    {% endfor %}
-    <input type = 'submit' value ='전송'>
-</form>
+{% extends './base.html' %}
+
+{% block main1 %}
+<div id ="main">
+    <form id="main2" method="post">
+        <h1 id="review">REVIEW</h1>
+        {% csrf_token %}
+            <h3 id ="title">제목</h3>
+            <p>{{form.title}}</P>
+            {% for error in form.title.errors %}
+                <p>{{error}}</p>
+            {% endfor %}
+            <h3 id = "content">내용</h3>
+            <p>{{form.content}}</P>
+            {% for error in form.content.errors %}
+                <p>{{error}}</p>
+            {% endfor %}
+            <br>
+            <button id = "but" type = 'submit'>작성 완료</button>
+        </form>
+</div>
+{% endblock %}
+
+{% block style %}
+<style>
+    #main{
+        width:800px;
+        height: 850px;
+        margin: auto;
+        margin-top:100px;
+        margin-bottom: 100px;
+        border: solid 2px rgba(255, 255, 255, 0.75) ;
+        border-radius: 20px;
+        padding : 50px;
+    }
+    #main2{
+        width: 600px;
+        margin: auto;
+    }
+    #review{
+        font-size: 40px;
+        font-weight: 300px;
+        margin-top: 30px;
+    }
+    #title, #content{
+        font-size: 17px;
+        font-weight: 300px;
+    }
+    #but{
+        border: none;
+        width:600px;
+        height: 50px;
+        border-radius: 6px;
+        color:#ffffff;
+        background-color: #e44c65;
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+    #id_content{
+        resize: none;
+    }
+</style>
+{% endblock %}
 
