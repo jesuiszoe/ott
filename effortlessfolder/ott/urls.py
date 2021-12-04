@@ -5,7 +5,11 @@ from . import views
 app_name = 'ott'
 urlpatterns = [
     path('', views.main, name ='main'),
-    # path('search', views.search, name='search'),
+    path('amazon/', views.amazon, name='amazon'),
+    path('hulu/', views.hulu, name='hulu'),
+    path('disney/', views.disney, name='disney'),
+    path('netflix/', views.netflix, name='netflix'),
+    
     
 
     

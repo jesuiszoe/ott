@@ -1,56 +1,253 @@
-{% extends './base.html' %} 
+{% extends './base.html' %}
 
-
-
-
+{% block header %}
+{% endblock %}
 
 {% block main1 %}
+{#<br><br>#}
+{#<h1 style="font-family:'Times'; font-size:20px;" align = 'right'>{{ date }}</h1>#}
 
-{% block date-block %}
-    <div> {{date}}</div>
-{% endblock date-block %}
+<h2 style="font-family:'Nanum Gothic'; font-size:50px;" align = 'center'><img style = "vertical-align : middle"; src="../../static/ott/css/netflix.png" height ="130" width="200" /></h2>
+
+<ul id="menu" align = "center">
+  <li><a href= {% url 'review:post-list' %}><img style = "vertical-align : middle"; src="../../static/ott/css/netflix.png" height ="40" width="80" /></a></li>
+  <li><a href= {% url 'review:post-list' %}><img style = "vertical-align : middle"; src="../../static/ott/css/prime.png" height ="40" width="80" /></a></li>
+  <li><a href= {% url 'review:post-list' %}><img style = "vertical-align : middle"; src="../../static/ott/css/hulu.png" height ="40" width="80" /></a></li>
+  <li><a href= {% url 'review:post-list' %}><img style = "vertical-align : middle"; src="../../static/ott/css/disney.png" height ="40" width="80" /></a></li>
+</ul>
 
 
-<h1>main page</h1>
+<div class="row justify-content-end my-3">
+  <div class="col-4 input-group">
+      <input type="text" class="form-control kw" value="{{ kw|default_if_none:'' }}">
+      <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+      </div>
+  </div>
+</div>
+
+
+<br>
 
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">type</th>
-      <th scope="col">title</th>
-      <th scope="col">director</th>
-      <th scope="col">country</th>
-      <th scope="col">release_year</th>
-      <th scope="col">rating</th>
-      <th scope="col">duration</th>
-      <th scope="col">listed_in</th>
-      <th scope="col">description</th>
-      
-      
+      <td style = "font-family:'Nanum Gothic'; font-size : 20px; font-weight: 400;" scope="col">#</td>
+      <td style = "font-family:'Nanum Gothic'; font-size : 20px; font-weight: 400;" scope="col">Type</td>
+      <td style = "font-family:'Nanum Gothic'; font-size : 20px; font-weight: 400;" scope="col">Title</td>
+      <td style = "font-family:'Nanum Gothic'; font-size : 20px; font-weight: 400;" scope="col">Director</td>
+      <td style = "font-family:'Nanum Gothic'; font-size : 20px; font-weight: 400;" scope="col">Country</td>
+      <td style = "font-family:'Nanum Gothic'; font-size : 20px; font-weight: 400;" scope="col">Release Year</td>
+      <td style = "font-family:'Nanum Gothic'; font-size : 20px; font-weight: 400;" scope="col">Rating</td>
+      <td style = "font-family:'Nanum Gothic'; font-size : 20px; font-weight: 400;" scope="col">Duration</td>
+      <td style = "font-family:'Nanum Gothic'; font-size : 20px; font-weight: 400;" scope="col">Listed In</td>
+{#      <td scope="col">description</td>#}
     </tr>
   </thead>
+
  {% for movie in movies %}
-  <tbody>
+     <tbody>
     <tr>
-      <th scope="row">{{movie.id}}</th>
-      <td>{{movie.type}}</td>
-      <td>{{movie.title}}</td>
-      <td>{{movie.director}}</td>
-      <td>{{movie.country}}</td>
-      <td>{{movie.release_year}}</td>
-      <td>{{movie.rating}}</td>
-      <td>{{movie.duration}}</td>
-      <td>{{movie.listed_in}}</td>
-      <td>{{movie.description}}</td>
-      
+      <td id="td1" style = "font-family:'Nanum Gothic'; font-size : 20px;" scope="row">{{movie.id}}</td>
+      <td style = "font-family:'Nanum Gothic'; font-size : 15px;">{{movie.type}}</td>
+      <td style = "font-family:'Nanum Gothic'; font-size : 15px;">{{movie.title}}</td>
+      <td style = "font-family:'Nanum Gothic'; font-size : 15px;">{{movie.director}}</td>
+      <td style = "font-family:'Nanum Gothic'; font-size : 15px;">{{movie.country}}</td>
+      <td style = "font-family:'Nanum Gothic'; font-size : 15px;">{{movie.release_year}}</td>
+      <td style = "font-family:'Nanum Gothic'; font-size : 15px;">{{movie.rating}}</td>
+      <td style = "font-family:'Nanum Gothic'; font-size : 15px;">{{movie.duration}}</td>
+      <td id="td2" style = "font-family:'Nanum Gothic'; font-size : 15px;">{{movie.listed_in}}</td>
     </tr>
-    
+    <td id="d" style = "font-family:'Nanum Gothic'; font-size : 13px;" colspan="9">{{movie.description}}</td>
   </tbody>
-  {% endfor %}
+ {% endfor %}
+
 </table>
 
+    <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% if movies.has_previous %}
+        <li class="page-item">
+            <a class="page-link" data-page="{{ movies.previous_page_number }}" href="#">이전</a>
+        
+          </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+        {% endif %}
+        <!-- 페이지리스트 -->
+        {% for page_number in movies.paginator.page_range %}
+        {% if page_number >= movies.number|add:-5 and page_number <= movies.number|add:5 %}
+            {% if page_number == movies.number %}
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
+            </li>
+            {% endif %}
+        {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if movies.has_next %}
+        <li class="page-item">
+            <a class="page-link" data-page="{{ movies.next_page_number }}" href="#">다음</a>
+            
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징처리 끝 -->
+    <form id="searchForm" method="get" action="{% url 'ott:main' %}">
+      <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
+      <input type="hidden" id="page" name="page" value="{{ page }}">
+    </form>
 
+{% endblock %}
+{% block script %}
+<script type='text/javascript'>
+$(document).ready(function(){
+    $(".page-link").on('click', function() {
+        $("#page").val($(this).data("page"));
+        $("#searchForm").submit();
+    });
 
+    $("#btn_search").on('click', function() {
+        $("#kw").val($(".kw").val());
+        $("#page").val(1);  // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
+        $("#searchForm").submit();
+    });
+});
+</script>
+{% endblock %}
+
+{% block style %}
+
+<style>
+ul {
+    text-align: center;
+}
+li{
+    display: inline-block;
+}
+input{
+    float:left;
+    }
+
+button{
+        border: 1px solid #E44C65;
+        border-radius: 10px;
+        background-color:#E44C65;
+        color:white;
+        width:200px;
+        height:50px;
+        display: inline-block;
+        vertical-align: top;
+        font-size: 13px;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+h2{
+  margin: auto;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+#bottom{
+  margin-bottom: 30px;
+}
+.table {
+    width:1000px;
+    margin:auto;
+    background-color: #1C1D26;
+    border-collapse: collapse;
+    text-align: left;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+
+td {
+  text-align: center;
+  
+    width : 1000px;
+
+}
+#menu{
+  list-style:none;
+  width:1000px;
+  height:60px;
+  padding-left: 200px;
+  padding-right: 200px;
+  margin:auto;
+  background-color: rgba(255, 255, 255, 0.075);
+  align-items: center;
+}
+#menu li{
+  float:left;
+  width:150px;
+  position:relative;
+  height: 60px;
+  margin:0;
+  padding:0;
+  line-height: 60px;
+  text-align: center;
+  color: white;
+}
+
+#d{
+  background-color:rgba(255, 255, 255, 0.075);
+  border-bottom:solid 15px #1C1D26;
+}
+hr {
+  background-color: #E44C65;
+  height: 5px;
+  width:1000px;
+  margin: auto;
+}
+{#.pagination {#}
+{#  position: absolute;#}
+{#  left: 50%;#}
+{#  top: 50%;#}
+{#  transform: translate(-50%, -50%);#}
+{#  margin: 0;#}
+{#  padding: 10px;#}
+{#  background-color: #fff;#}
+{#  border-radius: 40px;#}
+{#  box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.5);#}
+{#}#}
+{#.pagination li {#}
+{#  display: inline-block;#}
+{#  list-style: none;#}
+{#}#}
+{#.pagination li a {#}
+{#  display: block;#}
+{#  width: 40px;#}
+{#  height: 40px;#}
+{#  line-height: 40px;#}
+{#  background-color: #fff;#}
+{#  text-align: center;#}
+{#  text-decoration: none;#}
+{#  color: #252525;#}
+{#  border-radius: 4px;#}
+{#  margin: 5px;#}
+{#  box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.1), 0 2px 5px rgba(0, 0, 0, 0.5);#}
+{#  transition: all 0.3s ease;#}
+{#}#}
+{#.pagination li a:hover, .pagination li a.active {#}
+{#  color: #fff;#}
+{#  background-color: #ff4242;#}
+{#}#}
+{#.pagination li:first-child a {#}
+{#  border-radius: 40px 0 0 40px;#}
+{#}#}
+{#.pagination li:last-child a {#}
+{#  border-radius: 0 40px 40px 0;#}
+{#}#}
+</style>
 
 {% endblock %}
