@@ -28,8 +28,7 @@
                                 {% if user.is_authenticated %}
                                 <a style=" font-size:15px;" href="{% url 'ott:main' %}">Logout</a>
                                 {% else %}
-                                <a style=" font-size:15px;" href="{% url 'user:login' %}">LogIn</a>
-                                <a style=" font-size:15px;" href="{% url 'user:signup' %}">Signup</a>
+                                
                                 {% endif %}
                             </li>
 						</ul>
