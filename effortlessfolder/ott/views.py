@@ -1,5 +1,5 @@
-from django.shortcuts import render,get_object_or_404, redirect
-from django.http import HttpResponse
+from django.shortcuts import render
+
 from datetime import datetime
 from .models import Amazon, Disney, Hulu, Netflix
 from django.db.models import Q
