@@ -4,8 +4,8 @@
 {% endblock %}
 
 {% block main1 %}
-{#<br><br>#}
-{#<h1 style="font-family:'Times'; font-size:20px;" align = 'right'>{{ date }}</h1>#}
+
+<h1 style="font-family:'Times'; font-size:20px;">{{ date }}의 OTT 서비스</h1>
 
 <h2 style="font-family:'Nanum Gothic'; font-size:50px;" align = 'center'><img style = "vertical-align : middle"; src="../../static/ott/css/netflix.png" height ="130" width="200" /></h2>
 
@@ -16,10 +16,12 @@
   <li><a href= {% url 'review:post-list' %}><img style = "vertical-align : middle"; src="../../static/ott/css/disney.png" height ="40" width="80" /></a></li>
 </ul>
     <br>
+<form action ="{% url 'ott:main' %}" method="GET">
 <div style = "width : 800px; height : 50px; margin:auto;">
   <button style = "width : 100px; margin-bottom : 20px; margin : 0px; float : right"> 검색 </button>
-  <input style = "margin-bottom : 20px; width : 650px"; type="text" placeholder="contents name">
+  <input style = "margin-bottom : 20px; width : 650px"; type="text" placeholder="contents name" name="kw" value= {{kw}}>
 </div>
+</form>
 <br>
 
 <table class="table">
@@ -34,7 +36,7 @@
       <td style = "font-family:'Nanum Gothic'; font-size : 20px; font-weight: 400;" scope="col">Rating</td>
       <td style = "font-family:'Nanum Gothic'; font-size : 20px; font-weight: 400;" scope="col">Duration</td>
       <td style = "font-family:'Nanum Gothic'; font-size : 20px; font-weight: 400;" scope="col">Listed In</td>
-{#      <td scope="col">description</td>#}
+
     </tr>
   </thead>
 
