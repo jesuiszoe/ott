@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# 각 앱마다 url 연결
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('user.urls')),

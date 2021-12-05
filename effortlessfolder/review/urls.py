@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 
+# 리뷰 관련 url 
 app_name = 'review'
 urlpatterns = [
     

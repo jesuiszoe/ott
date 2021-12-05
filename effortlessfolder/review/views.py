@@ -5,19 +5,20 @@ from django.db.models import Q
 
 
 # Create your views here.
+#리뷰 조회 목록 구현
 def post_list(request):
     posts = Post.objects.all()
     context = {"posts":posts}
     
 
     return render(request, 'review/post_list.html', context)
-
+# 리뷰 세부 페이지 구현
 def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     context = {"post" : post}
     return render(request, 'review/post_detail.html', context)
 
-
+# 리뷰 생성
 def post_create(request):
     if request.method == 'POST':
         post_form = PostForm(request.POST)
@@ -32,7 +33,7 @@ def post_create(request):
         post_form = PostForm()
     return render(request, 'review/post_form.html', {'form' : post_form})
 
-
+# 리뷰 수정
 def post_update(request, post_id):
     post = Post.objects.get(id=post_id)
     if request.method =='POST':
@@ -43,7 +44,7 @@ def post_update(request, post_id):
     else:
         post_form = PostForm(instance=post)
     return render(request, 'review/post_form.html', {'form' : post_form})
-
+# 리뷰 삭제 
 def post_delete(request, post_id):
     post = Post.objects.get(id=post_id)
     if request.method =='POST':
@@ -52,14 +53,3 @@ def post_delete(request, post_id):
     else:
         return render(request, 'review/post_confirm_delete.html', {'post': post})
 
-# def search(request):
-#     posts = Post.objects.all().order_by('-id')
-
-#     q = request.POST.get('q', "") 
-
-#     if q:
-#         posts = posts.filter(title__icontains=q)
-#         return render(request, 'review/search.html', {'posts' : posts, 'q' : q})
-    
-#     else:
-#         return render(request, 'review/search.html')

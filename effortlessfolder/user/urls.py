@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 
-
+#user에 관련된 url 설정
 app_name = 'user'
 urlpatterns = [
     

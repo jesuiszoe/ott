@@ -12,7 +12,7 @@ from django.core.paginator import Paginator
 
    
 
-
+# 메인 페이지 데이터베이스 ott_netflix 테이블에서 데이터 가져오기
 def main(request):
     today = datetime.today().date()
     movies = Netflix.objects.all()
@@ -46,7 +46,7 @@ def main(request):
     context = {'date': today, 'movies': page_obj , 'page': page ,'kw':kw }
 
     return render(request, 'ott/main.html', context)
-
+#데이터베이스 ott_amazon 테이블에서 데이터 가져오기
 def amazon(request):
     today = datetime.today().date()
     movies = Amazon.objects.all()
@@ -81,7 +81,7 @@ def amazon(request):
 
     return render(request, 'ott/amazon.html', context)
     
-
+#데이터베이스 ott_hulu 테이블에서 데이터 가져오기
 
 def hulu(request):
     today = datetime.today().date()
@@ -116,7 +116,7 @@ def hulu(request):
     context = {'date': today, 'movies': page_obj , 'page': page ,'kw':kw }
 
     return render(request, 'ott/hulu.html', context)
-
+#데이터베이스 ott_disney 테이블에서 데이터 가져오기
 def disney(request):
     today = datetime.today().date()
     movies = Disney.objects.all()

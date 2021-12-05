@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+# 넷플릭스 데이블
 class Netflix(models.Model):
     type = models.CharField(max_length=200)
     title = models.CharField(max_length=50, unique =True)
@@ -14,7 +15,7 @@ class Netflix(models.Model):
 
     def __str__(self):
         return self.title
-
+# 훌루 테이블
 class Hulu(models.Model):
     type = models.CharField(max_length=200)
     title = models.CharField(max_length=50, unique =True)
@@ -27,7 +28,7 @@ class Hulu(models.Model):
     def __str__(self):
         return self.title
     
-
+# 아마존 테이블
 class Amazon(models.Model):
     type = models.CharField(max_length=200)
     title = models.CharField(max_length=50, unique =True)
@@ -40,7 +41,7 @@ class Amazon(models.Model):
 
     def __str__(self):
         return self.title
-
+# 디즈니 테이블
 class Disney(models.Model):
     type = models.CharField(max_length=200)
     title = models.CharField(max_length=50, unique =True)

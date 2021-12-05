@@ -8,8 +8,8 @@
 {% block main1 %}<!--메인에 들어갈 내용 작성 시작-->
 <div id="main" class="wrapper style1">
 	<div align = "center" class="container">
-		<p style=" font-size:20px; font-weight: 500;">{{post.title}}</p>
-		<p style=" font-size:15px;">삭제하시겠습니까?</p>
+		<p style=" font-size:23px; font-weight: 500;">{{post.title}}</p>
+		<p style=" font-size:18px;">삭제하시겠습니까?</p>
 		<section id="content">
 			<form method="POST">
 			{% csrf_token %}<!--사용자의 의도와 관계 없이 행해지는 공격 방어-->
@@ -30,12 +30,14 @@
         color:white;
         width:150px;
         height:40px;
+		line-height: 40px;
         display: inline-block;
         vertical-align: top;
-        font-size: 13px;
+        font-size: 15px;
         cursor: pointer;
         margin-top: 20px;
 		margin-bottom: 0;
+		box-shadow: none;
     }
 	/*기타*/
 	form{

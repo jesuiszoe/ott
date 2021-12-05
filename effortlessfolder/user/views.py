@@ -4,6 +4,7 @@ from django.contrib import auth
 
 
 # Create your views here.
+#회원가입 구현
 def signup(request):
     if request.method == 'POST':
         # User has info and wants an account now!
@@ -23,7 +24,7 @@ def signup(request):
         return render(request, 'user/signup.html')
     
 
-
+#로그인 구현
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -37,7 +38,7 @@ def login(request):
 
     else:
         return render(request, 'user/login.html')
-
+#로그아웃 구현
 def logout(request):
     auth.logout(request)
     return redirect('/')
