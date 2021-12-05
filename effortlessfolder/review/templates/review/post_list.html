@@ -1,60 +1,28 @@
-{% extends './base.html' %}
+<!--
+	review 템플릿의 post_list.html입니다.
+	작성된 리뷰의 목록을 보여주고 리뷰작성페이지로 이동 가능한 버튼을 제공하는 페이지입니다.
+-->
 
+{% extends './base.html' %}<!--review템플릿의 base.html 템플릿 확장-->
 
-{% block content %}
-
-    {% if not posts %}
-    <h1>검색하신 내용이 없습니다</h1>
-
-        
-
-
-    {% else %}
-
-        {% for post in posts.all %}
-        <div class="container"> 
-            <div class="card">
-                <div class="card-body">
-                    <h1>{{ post.title }}</h1>
-                    <p>{{ post.dt_created }}</p>
-                    
-                </div>
-            </div>
-        </div>
-        <br>
-        {% endfor %}
-
-    {% endif %}
-
-{% endblock %}
-
-{% block main1 %}
+{% block main1 %}<!--메인에 들어갈 내용 작성 시작-->
     <h1 id = "pageTitle">CONTENTS REVIEW</h1>
     <br>
-    {% comment %} <!--검색-->
-    <form method="GET" action="{% url 'review:search' %}">
-    {% csrf_token %}
-        <div id="search">
-            <button type="submit">검색</button>
-            <input name="q" type="text" value="{{q}}" placeholder="제목을 입력해주세요">
-            
-        </div>
-    </form> {% endcomment %}
-    <div id="link">
+
+    <div id="link"><!--리뷰작성을 위한 버튼-->
         <a href= {% url 'review:post-create' %}>
             <button type="submit">리뷰 작성하기</button>
         </a>
     </div>
 <br>
-    <table id = "create">
-
+    <table id = "create"><!--리뷰 목록-->
         <tr id="infor">
             <td>ID</td>
             <td class="title">제목</td>
             <td class = "date">작성일</td>
             <td class = "mod">수정일</td>
         </tr>
-        {% for post in posts %}
+        {% for post in posts %}<!--for문을 이용해 저장된 모든 리뷰를 표시-->
         <tr id="list">
             <td>{{post.id}}</td>
             <td class = "title"><a href={% url 'review:post-detail' post.id %}>{{post.title}}</a></td> 
@@ -67,25 +35,14 @@
 
 {% block style %}
 <style>
-    h1, table, form, #search, #link{
-        width:1000px;
-        margin:auto;
+    /*버튼*/
+    #link{
+        margin-bottom: 20px;
     }
-    #search{
-        width:1000px;
-        margin:auto;
-    }
-    #search input{
-        width:300px;
-        height:35px;
-        float:right;
-        font-size: 15px;
-        margin-right:20px;
-    }
-    #search button{
-        float:right;
+    #link button{
         border: none;
-        width:60px;
+        float: right;
+        width:120px;
         height: 35px;
         border-radius: 6px;
         color:#ffffff;
@@ -93,6 +50,7 @@
         font-weight: 500;
         cursor: pointer;
     }
+    /*리뷰목록테이블*/
     .title{
         width: 500px;
     }
@@ -108,6 +66,17 @@
         margin-top : 10px;
         margin-bottom: 100px;
     }
+    #infor,#list{
+        text-align: center;
+    }
+    #list{
+        background-color: #1c1d26;
+    }
+    /*기타*/
+    h1, table, form, #search, #link{
+        width:1000px;
+        margin:auto;
+    }
     #pageTitle{
         text-align: center;
         margin: auto;
@@ -118,25 +87,6 @@
         font-weight: 600;
         position: relative;
     }
-    #infor,#list{
-        text-align: center;
-    }
-    #list{
-        background-color: #1c1d26;
-    }
-    #link{
-        margin-bottom: 20px;
-    }
-    #link button{
-        border: none;
-        float: left;
-        width:120px;
-        height: 35px;
-        border-radius: 6px;
-        color:#ffffff;
-        background-color: #e44c65;
-        font-weight: 500;
-        cursor: pointer;
-    }
+
 </style>
 {% endblock %}

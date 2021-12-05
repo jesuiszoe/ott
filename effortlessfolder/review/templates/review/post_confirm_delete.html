@@ -1,48 +1,54 @@
+<!--
+	review 템플릿의 post_confirm_delete.html입니다.
+	작성한 리뷰를 삭제하기 전에 확인을 거치는 용도의 페이지 입니다.
+-->
 
+{% extends './base.html' %}<!--review템플릿의 base.html 템플릿 확장-->
 
-{% extends './base.html' %}
-{% block header %}
-{% endblock %}
-{% block main1 %}
-	<div id="main" class="wrapper style1">
+{% block main1 %}<!--메인에 들어갈 내용 작성 시작-->
+<div id="main" class="wrapper style1">
 	<div align = "center" class="container">
-		<p style="font-family:'Nanum Gothic'; font-size:20px; font-weight: 500;">{{post.title}}</p>
-		<p style="font-family:'Nanum Gothic'; font-size:15px;">삭제하시겠습니까?</p>
+		<p style=" font-size:20px; font-weight: 500;">{{post.title}}</p>
+		<p style=" font-size:15px;">삭제하시겠습니까?</p>
 		<section id="content">
 			<form method="POST">
-			{% csrf_token %}
+			{% csrf_token %}<!--사용자의 의도와 관계 없이 행해지는 공격 방어-->
 			<input id="button" type = "submit" value="삭제하기">
 			</form>
 		</section>
 	</div>
-	</div>
+</div>
 {% endblock %}
-{% block style %}
+
+{% block style %}<!--각 페이지별 스타일시트 적용 부분 시작-->
     <style>
-		form{
-			margin:0;
-		}
-		#main{
-			padding-top:200px;
-			padding-bottom: 200px;
-		}
-		input{
-			border:none;
-			margin-bottom: 0;
-		}
-		#button{
-        	border:none;
-        	border-radius: 7px;
-        	background-color:#e44c65;
-        	color:white;
-        	width:150px;
-        	height:40px;
-        	display: inline-block;
-        	vertical-align: top;
-        	font-size: 13px;
-        	cursor: pointer;
-        	margin-top: 20px;
-			margin-bottom: 0;
-    	}
+	/*버튼*/
+	#button{
+        border:none;
+        border-radius: 7px;
+        background-color:#e44c65;
+        color:white;
+        width:150px;
+        height:40px;
+        display: inline-block;
+        vertical-align: top;
+        font-size: 13px;
+        cursor: pointer;
+        margin-top: 20px;
+		margin-bottom: 0;
+    }
+	/*기타*/
+	form{
+		margin:0;
+	}
+	#main{
+		padding-top:200px;
+		padding-bottom: 200px;
+	}
+	input{
+		border:none;
+		margin-bottom: 0;
+	}
+
     </style>
 {% endblock %}

@@ -1,47 +1,58 @@
+<!--
+	review 템플릿의 postdetail.html입니다.
+	리뷰 목록에서 작성된 리뷰를 선택 시 리뷰 수정 삭제 및 열람이 가능하도록 하는 페이지입니다.
+-->
 
+{% extends './base.html' %}<!--review템플릿의 base.html 템플릿 확장-->
 
-{% extends './base.html' %}
-{% block header %}
-{% endblock %}
-{% block main1 %}
+{% block main1 %}<!--메인에 들어갈 내용 작성 시작-->
 <div id="main">
 	<div class="container">
 		<header class="major">
-			<h2 style="font-family:'Nanum Gothic'; font-size:25px; font-weight: 500;">{{post.title}}</h2>
+			<h2 style=" font-size:25px; font-weight: 500;">{{post.title}}</h2><!--선택한 리뷰의 제목-->
 		</header>
 		<section id="content">
-			<div style="font-family:'Times'; font-size:18px;"> 작성일 </div>
-            <div style="font-family:'Times'; font-size:15px;">{{post.dt_created}}</div>
+			<div style=" font-size:18px;"> 작성일 </div>
+            <div style=" font-size:15px;">{{post.dt_created}}</div><!--선택한 리뷰의 작성일-->
             <br>
 			<hr>
-			<div class="my-box" style="font-family:'Times'; font-size:15px;">{{post.content|linebreaksbr}}</div>
+			<div class="my-box" style=" font-size:15px;">{{post.content|linebreaksbr}}</div><!--선택한 리뷰의 내용-->
 			<hr>
-<!--            <button type="button" onclick="location.href={% url 'review:post-list' %}"#}
-{#                    style = " font-family : 'Nanum Gothic'; font-size : 18px; color : white;"> 돌아가기 </button>#}
-{##}
-{#            <button type="button" onclick="location.href={% url 'review:post-update' post.id %}"#}
-{#                    style = " font-family : 'Nanum Gothic'; font-size : 18px; color : white;"> 수정하기 </button>#}
-{##}
-{#            <button type="button" onclick="location.href={% url 'review:post-delete' post.id %}"#}
-{#                    style = " font-family : 'Nanum Gothic'; font-size : 18px; color : white;"> 삭제하기 </button>#} -->
 
-            <div id="buts">
-                <a href= {% url 'review:post-list' %} > <button id="button" style = " font-family : 'Nanum Gothic'; font-size : 15px; font-weight:500; color : white;"> 돌아가기 </button> </a>
+            <div id="buts"><!--돌아가기, 수정하기, 삭제하기 버튼-->
+                <a href= {% url 'review:post-list' %} > <button id="button" style = "  font-size : 15px; font-weight:500; color : white;"> 돌아가기 </button> </a>
                 &nbsp;
-                <a href= {% url 'review:post-update' post.id %}  > <button id="button" style = "font-family : 'Nanum Gothic'; font-size : 15px; font-weight:500; color : white;"> 수정하기 </button> </a>
+                <a href= {% url 'review:post-update' post.id %}  > <button id="button" style = " font-size : 15px; font-weight:500; color : white;"> 수정하기 </button> </a>
                 &nbsp;
-                <a href= {% url 'review:post-delete' post.id %} > <button id="button" style = "font-family : 'Nanum Gothic'; font-size : 15px; font-weight:500; color : white;"> 삭제하기 </button> </a>
+                <a href= {% url 'review:post-delete' post.id %} > <button id="button" style = " font-size : 15px; font-weight:500; color : white;"> 삭제하기 </button> </a>
             </div>
             
-            </section>
+        </section>
     </div>
 </div>
 {% endblock main1 %}
-{% block style %}
+
+{% block style %}<!--각 페이지별 스타일시트 적용 부분 시작-->
 <style>
-    header{
-        margin-bottom: 15px;
+    /*버튼*/
+    #buts{
+        padding-top: 20px;
+        text-align: center;
     }
+    #button{
+        border:none;
+        border-radius: 7px;
+        background-color:#e44c65;
+        color:white;
+        width:130px;
+        height:40px;
+        display: inline-block;
+        vertical-align: top;
+        font-size: 13px;
+        cursor: pointer;
+        margin-right: 10px;
+    }	
+    /*리뷰*/
     h2{
         margin:0px;
     }
@@ -55,25 +66,13 @@
         border:1px solid #e44c65; padding:15px;
         border-radius: 10px;
     }
+    /*기타*/
+    header{
+        margin-bottom: 15px;
+    }
     hr{
         margin:10px;
     }
-    #buts{
-        padding-top: 20px;
-        text-align: center;
-    }
-    #button{
-        	border:none;
-        	border-radius: 7px;
-        	background-color:#e44c65;
-        	color:white;
-        	width:130px;
-        	height:40px;
-        	display: inline-block;
-        	vertical-align: top;
-        	font-size: 13px;
-        	cursor: pointer;
-            margin-right: 10px;
-    	}
+
 </style>
 {% endblock %}

@@ -1,6 +1,10 @@
+<!--
+	review 템플릿의 base.html입니다.
+	모든 페이지에 동일하게 적용되는 속성들을 base.html에 작성하여 템플릿 확장에 사용합니다.
+    review 템플릿에서는 리뷰 작성 기능 구현을 중점으로 페이지를 제작합니다.
+-->
 
-
-{% load static %}
+{% load static %}<!--static 폴더(css,img파일)를 로드-->
 <!DOCTYPE HTML>
 
 <!--
@@ -8,6 +12,7 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
+
 <html>
 	<head>
         <title>effortless</title>
@@ -20,37 +25,33 @@
     <body class="is-preload">
         <div id="page-wrapper">
             <!-- Header -->
-                <header id="header">
-                    <h1 id="logo"><a href="{% url 'ott:main' %}">project name</a></h1>
+                <header id="header"><!--상단의 네비게이션바-->
+                    <h1 id="logo"><a href="{% url 'ott:main' %}">Effortless</a></h1><!--네비게이션 바 좌측의 Effortless 클릭 시 메인페이지로 이동-->
                     <nav id="nav">
 						<ul>
-							<li>
-                                {% if user.is_authenticated %}
-                                <a style=" font-size:15px;" href="{% url 'ott:main' %}">Logout</a>
-                                {% else %}
-                                
-                                {% endif %}
+							<li><!--메인 페이지로 이동하는 링크-->
+                                <a style=" font-size:15px;" href="{% url 'ott:main' %}">Home</a>
                             </li>
 						</ul>
 					</nav>
-                    {% block header %}
+                    {% block header %}<!--템플릿 확장 시 header block 내용 추가를 위한 블럭-->
     
                     {% endblock %}
                 </header>
 
             <!-- Main -->
-                {% block main1 %}
+                {% block main1 %}<!--템플릿 확장 시 main1 block 내용 추가를 위한 블럭-->
     
                 {% endblock %}
     
             <!-- Footer -->
-                <footer id="footer">
+                <footer id="footer"><!--모든 페이지의 하단에 위치할 footer 작성-->
                     <ul class="copyright">
                         <li>최대효율의 법칙. All rights reserved.</li>
                     </ul>
                 </footer>
         </div>
-        {% block style %}
+        {% block style %}<!--각 페이지의 stylesheet 내용 추가를 위한 블럭-->
         {% endblock %}
     </body>
 </html>

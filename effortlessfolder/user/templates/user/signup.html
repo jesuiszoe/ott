@@ -1,22 +1,24 @@
-{% extends './base.html' %}
+<!--
+	user 템플릿의 signup.html입니다.
+	회원가입을 위한 폼을 구성합니다.
+-->
 
-{% block header %}
-{% endblock %}
+{% extends './base.html' %}<!--user템플릿의 base.html 템플릿 확장-->
 
-{% block main1 %}
-{% if error %}
+{% block main1 %}<!--메인에 들어갈 내용 작성 시작-->
+{% if error %}<!--에러감지-->
 {{ error }}
 <br>
 <br>
-{% endif %}
+{% endif %}<!--에러없는 경우-->
 <div id="main" class="signupPage1">
     <h1 id="signup">Sign Up!</h1>
 
     <form method="POST" action="{% url 'user:signup'%}">
 
-    {% csrf_token %}
+    {% csrf_token %}<!--사용자의 의도와 관계 없이 행해지는 공격 방어-->
     <div id="idCheck", class="input_box">
-        <h2>User Name</h2>
+        <h2>ID</h2><!--ID입력-->
         <input name="username"  type="text" value="" placeholder="User Name">
         <br>
     </div>
@@ -24,10 +26,10 @@
     <br>
 
     <div id="passCheck", class="input_box">
-        <h2>Password</h2>
+        <h2>Password</h2><!--PW입력-->
         <input name="password1"  type="password" value="" placeholder="Password">
         <br><br>
-        <h2>Confirm Password</h2>
+        <h2>Confirm Password</h2><!--PW재입력-->
         <input name="password2"  type="password" value="" placeholder="Confirm Password">
     </div> 
     <br>
@@ -40,14 +42,23 @@
 
 {% block style %}
 <style>
-    #header{
-        display: block;
+    /*버튼*/
+    button{
+        border:none;
+        margin-left:22px;
+        border-radius: 10px;
+        background-color:#e44c65;
+        color:white;
+        width:450px;
+        height:50px;
+        display: inline-block;
+        vertical-align: top;
+        font-size: 15px;
+        cursor: pointer;
+        left:50%;
+
     }
-    #signup{
-        font-size: 35px;
-        color: rgba(255, 255, 255, 0.75);
-        font-weight: 400;
-    }
+    /*회원가입*/
     #main{
         margin:auto;
         margin-top:100px;
@@ -57,7 +68,6 @@
         border:#aaa solid 2px;
         border-radius: 20px;
     }
-
     .input_box input , h2{
         width : 450px;
         height: 55x;
@@ -78,20 +88,20 @@
         left:5px;
         text-indent: 5px;
     }
-    button{
-        border:none;
-        margin-left:22px;
-        border-radius: 10px;
-        background-color:#e44c65;
-        color:white;
-        width:450px;
-        height:50px;
-        display: inline-block;
-        vertical-align: top;
-        font-size: 15px;
-        cursor: pointer;
-        left:50%;
-
+    /*로고*/
+    #signup{
+        font-size: 35px;
+        color: rgba(255, 255, 255, 0.75);
+        font-weight: 400;
     }
+    /*기타*/
+    #header{
+        display: block;
+    }
+
+
+
+
+
 </style>
 {% endblock %}

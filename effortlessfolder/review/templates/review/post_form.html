@@ -1,18 +1,23 @@
-{% extends './base.html' %}
+<!--
+	review 템플릿의 post_form.html입니다.
+	리뷰 작성을 위한 폼을 구현한 페이지입니다.
+-->
 
-{% block main1 %}
+{% extends './base.html' %}<!--review템플릿의 base.html 템플릿 확장-->
+
+{% block main1 %}<!--메인에 들어갈 내용 작성 시작-->
 <div id ="main">
     <form id="main2" method="post">
         <h1 id="review">REVIEW</h1>
-        {% csrf_token %}
+        {% csrf_token %}<!--사용자의 의도와 관계 없이 행해지는 공격 방어-->
             <h3 id ="title">제목</h3>
             <p>{{form.title}}</P>
-            {% for error in form.title.errors %}
+            {% for error in form.title.errors %}<!--에러감지-->
                 <p>{{error}}</p>
             {% endfor %}
             <h3 id = "content">내용</h3>
             <p>{{form.content}}</P>
-            {% for error in form.content.errors %}
+            {% for error in form.content.errors %}<!--에러감지-->
                 <p>{{error}}</p>
             {% endfor %}
             <br>
@@ -21,8 +26,9 @@
 </div>
 {% endblock %}
 
-{% block style %}
+{% block style %}<!--각 페이지별 스타일시트 적용 부분 시작-->
 <style>
+    /*리뷰*/
     #main{
         width:800px;
         height: 850px;
@@ -46,6 +52,10 @@
         font-size: 17px;
         font-weight: 300px;
     }
+    #id_content{
+        resize: none;
+    }
+    /*버튼*/
     #but{
         border: none;
         width:600px;
@@ -57,9 +67,10 @@
         font-weight: 500;
         cursor: pointer;
     }
-    #id_content{
-        resize: none;
-    }
+
+
+
+
 </style>
 {% endblock %}
 
