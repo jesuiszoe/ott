@@ -1,56 +1,215 @@
-{% extends './base.html' %} 
+<!--
+	ott 템플릿의 amazon.html입니다.
+	아마존 프라임의 컨텐츠 목록을 표시하고 다른 배급사의 페이지로 이동 가능한 메뉴바를 제공하며
+  컨텐츠 제목 검색을 통해 아마존 프라임이 제공하는 컨텐츠들을 검색할 수 있습니다. 
+-->
 
 
+{% extends './base.html' %} <!--ott템플릿의 base.html 템플릿 확장-->
+{% load static %}  
+{% block main1 %}<!--메인에 들어갈 내용 작성 시작-->
 
+<!--메인부분 상단 배급사 이미지(아마존 프라임)-->
+<h2 style=" font-size:50px;" align = 'center'><img style = "vertical-align : middle"; src="../../static/ott/css/prime.png" height ="110" width="220" /></h2>
 
-
-{% block main1 %}
-
-{% block date-block %}
-    <div> {{date}}</div>
-{% endblock date-block %}
-
-
-<h1>main page</h1>
-
+<!--다른 배급사(넷플릭스, 디즈니플러스, 훌루) 페이지로 이동 가능한 메뉴바-->
+<ul id="menu" align = "center">
+  <li><a href= {% url 'ott:main' %}><img style = "vertical-align : middle"; src="../../static/ott/css/netflix.png" height ="40" width="80" /></a></li>
+  <li><a href= {% url 'ott:amazon' %}><img style = "vertical-align : middle"; src="../../static/ott/css/prime.png" height ="40" width="80" /></a></li>
+  <li><a href= {% url 'ott:hulu' %}><img style = "vertical-align : middle"; src="../../static/ott/css/hulu.png" height ="40" width="80" /></a></li>
+  <li><a href= {% url 'ott:disney' %}><img style = "vertical-align : middle"; src="../../static/ott/css/disney.png" height ="40" width="80" /></a></li>
+</ul>
+<br>
+<!--아마존 제공 컨텐츠 한정 검색 기능-->
+<form action ="{% url 'ott:amazon' %}" method="GET">
+  <div style = "width : 800px; height : 50px; margin:auto;">
+    <button style = "width : 100px; margin-bottom : 20px; margin : 0px; float : right;font-size: 15px; "> 검색 </button>
+    <input style = "margin-bottom : 20px; width : 650px"; type="text" placeholder="contents name" name="kw" value= {{kw}}>
+  </div>
+</form>
+<!--현재 날짜의 ott서비스임을 표시-->
+<div id="ott">
+  <h1 style=" font-size:15px;">{{ date }}의 OTT 서비스</h1>
+</div>
+<br>
+<!--아마존 프라임의 데이터베이스 스키마 메인화면에 제공-->
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">type</th>
-      <th scope="col">title</th>
-      <th scope="col">director</th>
-      <th scope="col">country</th>
-      <th scope="col">release_year</th>
-      <th scope="col">rating</th>
-      <th scope="col">duration</th>
-      <th scope="col">listed_in</th>
-      <th scope="col">description</th>
-      
-      
+      <td style = " font-size : 20px; font-weight: 400;" scope="col">#</td>
+      <td style = " font-size : 20px; font-weight: 400;" scope="col">Type</td>
+      <td style = " font-size : 20px; font-weight: 400;" scope="col">Title</td>
+      <td style = " font-size : 20px; font-weight: 400;" scope="col">Director</td>
+      <td style = " font-size : 20px; font-weight: 400;" scope="col">Release Year</td>
+      <td style = " font-size : 20px; font-weight: 400;" scope="col">Rating</td>
+      <td style = " font-size : 20px; font-weight: 400;" scope="col">Duration</td>
+      <td style = " font-size : 20px; font-weight: 400;" scope="col">listed_in</td>
     </tr>
   </thead>
- {% for movie in movies %}
+<!--아마존 프라임의 데이터베이스 저장 데이터 메인화면에 제공-->
+ {% for movie in movies %}<!--for문을 사용해 저장된 모든 컨텐츠 표시-->
   <tbody>
     <tr>
-      <th scope="row">{{movie.id}}</th>
-      <td>{{movie.type}}</td>
-      <td>{{movie.title}}</td>
-      <td>{{movie.director}}</td>
-      <td>{{movie.country}}</td>
-      <td>{{movie.release_year}}</td>
-      <td>{{movie.rating}}</td>
-      <td>{{movie.duration}}</td>
-      <td>{{movie.listed_in}}</td>
-      <td>{{movie.description}}</td>
-      
+      <td id="td1" style = " font-size : 20px;" scope="row">{{movie.id}}</td>
+      <td style = " font-size : 15px;">{{movie.type}}</td>
+      <td style = " font-size : 15px;">{{movie.title}}</td>
+      <td style = " font-size : 15px;">{{movie.director}}</td>
+      <td style = " font-size : 15px;">{{movie.release_year}}</td>
+      <td style = " font-size : 15px;">{{movie.rating}}</td>
+      <td style = " font-size : 15px;">{{movie.duration}}</td>
+      <td id="td2" style = " font-size : 15px;">{{movie.listed_in}}</td>
     </tr>
-    
+    <td id="d" style = " font-size : 13px;" colspan="9">{{movie.description}}</td>
   </tbody>
-  {% endfor %}
+ {% endfor %}
 </table>
+<!--페이징 구현부-->
+<div id="paging">
+  <!-- 페이징처리 시작 -->
+  <ul class="pagination justify-content-center">
+      <!-- 이전페이지 -->
+      {% if movies.has_previous %}
+      <li class="page-item">
+          <a class="page-link" href="?page={{ movies.previous_page_number }}">이전</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+          <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+      </li>
+      {% endif %}
+      <!-- 페이지리스트 -->
+      {% for page_number in movies.paginator.page_range %}
+      {% if page_number >= movies.number|add:-5 and page_number <= movies.number|add:5 %}
+          {% if page_number == movies.number %}
+          <li class="page-item active" aria-current="page">
+              <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+          </li>
+          {% else %}
+          <li class="page-item">
+              <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+          </li>
+          {% endif %}
+      {% endif %}
+      {% endfor %}
+      <!-- 다음페이지 -->
+      {% if movies.has_next %}
+      <li class="page-item">
+          <a class="page-link" href="?page={{ movies.next_page_number }}">다음</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+          <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+      </li>
+      {% endif %}
+  </ul>
+  <!-- 페이징처리 끝 -->
+</div>
 
+{% endblock %}
 
+{% block style %} <!--각 페이지별 스타일시트 적용 부분 시작-->
 
+<style>
+  /*폰트*/
+@font-face {
+	font-family: 'Chosunilbo_myungjo';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+/*검색*/
+input{
+  float:left;
+  }
+button{
+  border: 1px solid #E44C65;
+  border-radius: 10px;
+  background-color:#E44C65;
+  color:white;
+  width:200px;
+  height:50px;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 13px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+/*페이징*/
+#paging ul{
+  text-align: center;
+}
+#paging li{
+  display: inline-block;
+  width: 50px;
+  height: 15px;
+}
+/*메뉴바*/
+#menu{
+  list-style:none;
+  width:1000px;
+  height:60px;
+  padding-left: 200px;
+  padding-right: 200px;
+  margin:auto;
+  background-color: rgba(255, 255, 255, 0.075);
+  align-items: center;
+}
+#menu li{
+  float:left;
+  width:150px;
+  position:relative;
+  height: 60px;
+  margin:0;
+  padding:0;
+  line-height: 60px;
+  text-align: center;
+  color: white;
+}
+/*테이블*/
+table{
+  font-family: 'Chosunilbo_myungjo';
+}
+.table {
+  width:1000px;
+  margin:auto;
+  background-color: #1C1D26;
+  border-collapse: collapse;
+  text-align: left;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+td {
+  text-align: center;
+  width : 1000px;
+}
+#d{
+  background-color:rgba(255, 255, 255, 0.075);
+  border-bottom:solid 15px #1C1D26;
+}
+/*기타*/
+#ott{
+  padding-top: 20px;
+  padding-left:20px;
+}
+#ott h1{
+  color:rgba(255, 255, 255, 0.712);
+  text-align: center;
+  font-family: 'Cafe24Ssurround';
+}
+h2{
+  margin: auto;
+  padding-top: 80px;
+  padding-bottom: 30px;
+}
+a{
+  border-bottom: none;
+}
+</style>
 
 {% endblock %}

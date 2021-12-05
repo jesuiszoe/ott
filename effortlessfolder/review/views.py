@@ -7,21 +7,8 @@ from django.db.models import Q
 # Create your views here.
 def post_list(request):
     posts = Post.objects.all()
+    context = {"posts":posts}
     
-    kw = request.GET.get('kw', '')  # 검색어
-
-    """
-    pybo 목록출력
-    """
-  
-    
-    if kw:
-        movies = Post.filter(
-            Q(title__icontains=kw)   # 제목검색
-           
-        ).distinct()
-    context = {"posts":posts,'kw': kw}
-    # 페이징처리
 
     return render(request, 'review/post_list.html', context)
 

@@ -141,3 +141,12 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'ott', 'static')
+		# Django 3.1 버전에서는 
+		# Path(BASE_DIR, 'app_name', 'static')
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# Django 3.1 버전에서는 
+# Path(BASE_DIR, 'static')
