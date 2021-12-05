@@ -9,14 +9,14 @@
 {% block main1 %}<!--메인에 들어갈 내용 작성 시작-->
 
 <!--메인부분 상단 배급사 이미지(훌루)-->
-<h2 style=" font-size:40px; font-weight: 500;" align = 'center'><img style = "vertical-align : middle"; src="../../static/ott/css/hulu.png" height ="110" width="200" /></h2>
+<h2 style=" font-size:40px; font-weight: 500;" align = 'center'><img style = "vertical-align : middle"; src="{% static 'ott/hulu.png' %}" height ="110" width="200" /></h2>
 
 <!--다른 배급사(넷플릭스, 디즈니플러스, 아마존 프라임) 페이지로 이동 가능한 메뉴바-->
 <ul id="menu" align = "center">
-  <li><a href= {% url 'ott:main' %}><img style = "vertical-align : middle"; src="../../static/ott/css/netflix.png" height ="40" width="80" /></a></li>
-  <li><a href= {% url 'ott:amazon' %}><img style = "vertical-align : middle"; src="../../static/ott/css/prime.png" height ="40" width="80" /></a></li>
-  <li><a href= {% url 'ott:hulu' %}><img style = "vertical-align : middle"; src="../../static/ott/css/hulu.png" height ="40" width="80" /></a></li>
-  <li><a href= {% url 'ott:disney' %}><img style = "vertical-align : middle"; src="../../static/ott/css/disney.png" height ="40" width="80" /></a></li>
+  <li><a href= {% url 'ott:main' %}><img style = "vertical-align : middle"; src="{% static 'ott/netflix.png' %}" height ="40" width="80" /></a></li>
+  <li><a href= {% url 'ott:amazon' %}><img style = "vertical-align : middle"; src="{% static 'ott/prime.png' %}" height ="40" width="80" /></a></li>
+  <li><a href= {% url 'ott:hulu' %}><img style = "vertical-align : middle"; src="{% static 'ott/hulu.png' %}" height ="40" width="80" /></a></li>
+  <li><a href= {% url 'ott:disney' %}><img style = "vertical-align : middle"; src="{% static 'ott/disney.png' %}" height ="40" width="80" /></a></li>
 </ul>
 <br>
 <!--훌루 제공 컨텐츠 한정 검색 기능-->
