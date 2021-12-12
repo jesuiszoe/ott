@@ -18,8 +18,8 @@
 		<title>effortless</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href={% static 'user/css/main.css' %}/>
-		<noscript><link rel="stylesheet" href={% static 'user/css/noscript.css' %} /></noscript>
+		<link rel="stylesheet" href='../../static/user/css/main.css'/>
+		<noscript><link rel="stylesheet" href=../../static/user/css/noscript.css' /></noscript>
 	</head>
 	<body class="is-preload">
 		<div id="page-wrapper">
@@ -38,7 +38,7 @@
 								<li><!--로그인 여부와 관계 없이 리뷰 페이지로 이동하는 링크-->
 									<a style=" font-size:15px;" href="{% url 'review:post-list' %}">Review</a>
 								</li>
-                            
+
 						</ul>
 					</nav>
 
@@ -54,7 +54,7 @@
 
 			<!-- Footer -->
 				<footer id="footer"><!--모든 페이지의 하단에 위치할 footer 작성-->
-					
+
 					<ul class="copyright">
 						<li>최대효율의 법칙. All rights reserved.</li>
 					</ul>

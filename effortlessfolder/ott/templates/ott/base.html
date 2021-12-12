@@ -15,11 +15,11 @@
 
 <html>
 	<head>
-		<title>effortless</title> 
+		<title>effortless</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href={% static 'user/css/main.css' %}/>
-		<noscript><link rel="stylesheet" href={% static 'user/css/noscript.css' %} /></noscript>
+		<link rel="stylesheet" href= '../../static/ott/main.css' />
+		<noscript><link rel="stylesheet" href= '../../static/ott/noscript.css'/></noscript>
 	</head>
 
 	<body class="is-preload">
@@ -28,7 +28,7 @@
 				<header id="header"> <!--상단의 네비게이션바-->
 					<h1 id="logo"><a href="{% url 'ott:main' %}">Effortless</a></h1> <!--네비게이션 바 좌측의 Effortless 클릭 시 메인페이지로 이동-->
 					<nav id="nav">
-						<ul>	
+						<ul>
                                 {% if user.is_authenticated %} <!--사용자가 로그인 상태인 경우의 상단 네비게이션 바 상태 정의-->
 								<li style=" font-size:15px;" >{{user.username}}님 환영합니다.</li>
 								<li><a style=" font-size:15px;" href="{% url 'user:logout' %}">Logout</a></li>
@@ -39,7 +39,7 @@
 								<li> <!--로그인 여부와 관계 없이 리뷰 페이지로 이동하는 링크-->
 									<a style=" font-size:15px;" href="{% url 'review:post-list' %}">Review</a>
 								</li>
-                            
+
 						</ul>
 					</nav>
 						{% block header %} <!--템플릿 확장 시 header block 내용 추가를 위한 블럭-->
@@ -48,11 +48,11 @@
 				</header>
 
 			<!-- Main -->
-				
+
 				{% block main1 %} <!--템플릿 확장 시 main1 block 내용 추가를 위한 블럭-->
 
 				{% endblock main1 %}
-				
+
 
 			<!-- Footer -->
 				<footer id="footer"> <!--모든 페이지의 하단에 위치할 footer 작성-->

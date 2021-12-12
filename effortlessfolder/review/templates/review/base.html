@@ -18,10 +18,10 @@
         <title>effortless</title>
         <meta charset='UTF-8'>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href={% static 'review/css/main.css' %}/>
-		<noscript><link rel="stylesheet" href={% static 'review/css/noscript.css' %} /></noscript>
+		<link rel="stylesheet" href='../../static/review/css/main.css' %/>
+		<noscript><link rel="stylesheet" href='../../static/review/css/noscript.css' /></noscript>
     </head>
-    
+
     <body class="is-preload">
         <div id="page-wrapper">
             <!-- Header -->
@@ -35,15 +35,15 @@
 						</ul>
 					</nav>
                     {% block header %}<!--템플릿 확장 시 header block 내용 추가를 위한 블럭-->
-    
+
                     {% endblock %}
                 </header>
 
             <!-- Main -->
                 {% block main1 %}<!--템플릿 확장 시 main1 block 내용 추가를 위한 블럭-->
-    
+
                 {% endblock %}
-    
+
             <!-- Footer -->
                 <footer id="footer"><!--모든 페이지의 하단에 위치할 footer 작성-->
                     <ul class="copyright">
